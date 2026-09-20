@@ -4,17 +4,23 @@ import { useNavigate } from 'react-router-dom'
 function TeacherDashboard() {
   const navigate = useNavigate()
 
+  // Temporary messages for frontend testing.
+  // Later these will come from the database in real time.
   const [messages, setMessages] = useState([
     {
       id: 1,
       student: 'Ryder',
       message: 'I have a question.',
+      gesture: 'OPEN_PALM',
+      time: '10:42 AM',
       acknowledged: false,
     },
     {
       id: 2,
       student: 'Sarah',
       message: 'Please repeat that.',
+      gesture: 'POINT_UP',
+      time: '10:39 AM',
       acknowledged: true,
     },
   ])
@@ -28,6 +34,10 @@ function TeacherDashboard() {
       )
     )
   }
+
+  const waitingMessages = messages.filter(
+    (message) => !message.acknowledged
+  ).length
 
   return (
     <div className="page">
@@ -45,49 +55,119 @@ function TeacherDashboard() {
 
       <main className="dashboard">
 
-        <h2>Teacher Dashboard</h2>
+        <div className="dashboard-title">
+          <h2>Teacher Dashboard</h2>
 
-        <p>Student Messages</p>
+          <p>
+            View and acknowledge student messages in real time.
+          </p>
+        </div>
 
-        <div className="teacher-messages">
+        <section className="teacher-summary">
 
-          {messages.map((message) => (
+          <div className="summary-card">
+            <span className="summary-label">
+              Total Messages
+            </span>
 
-            <div
-              className="teacher-message-card"
-              key={message.id}
-            >
+            <strong>{messages.length}</strong>
+          </div>
 
-              <h3>{message.student}</h3>
+          <div className="summary-card">
+            <span className="summary-label">
+              Waiting
+            </span>
 
-              <p className="translated-message">
-                "{message.message}"
+            <strong>{waitingMessages}</strong>
+          </div>
+
+        </section>
+
+        <section className="message-feed">
+
+          <div className="message-feed-header">
+
+            <div>
+              <h3>Student Messages</h3>
+
+              <p>
+                New classroom messages will appear here.
               </p>
-
-              {message.acknowledged ? (
-
-                <p className="acknowledged">
-                  ✓ Acknowledged
-                </p>
-
-              ) : (
-
-                <button
-                  className="acknowledge-button"
-                  onClick={() =>
-                    acknowledgeMessage(message.id)
-                  }
-                >
-                  ✓ Acknowledge
-                </button>
-
-              )}
-
             </div>
 
-          ))}
+            <span className="live-status">
+              ● Live
+            </span>
 
-        </div>
+          </div>
+
+          <div className="teacher-messages">
+
+            {messages.map((message) => (
+
+              <article
+                className="teacher-message-card"
+                key={message.id}
+              >
+
+                <div className="message-card-top">
+
+                  <div>
+                    <h3>{message.student}</h3>
+
+                    <span className="message-time">
+                      {message.time}
+                    </span>
+                  </div>
+
+                  {message.acknowledged ? (
+                    <span className="acknowledged-badge">
+                      ✓ Acknowledged
+                    </span>
+                  ) : (
+                    <span className="waiting-badge">
+                      Waiting
+                    </span>
+                  )}
+
+                </div>
+
+                <div className="teacher-message-content">
+
+                  <span className="result-label">
+                    Message
+                  </span>
+
+                  <p className="translated-message">
+                    {message.message}
+                  </p>
+
+                  <span className="gesture-detail">
+                    Gesture: {message.gesture}
+                  </span>
+
+                </div>
+
+                {!message.acknowledged && (
+
+                  <button
+                    className="acknowledge-button"
+                    onClick={() =>
+                      acknowledgeMessage(message.id)
+                    }
+                  >
+                    ✓ Acknowledge
+                  </button>
+
+                )}
+
+              </article>
+
+            ))}
+
+          </div>
+
+        </section>
 
       </main>
 

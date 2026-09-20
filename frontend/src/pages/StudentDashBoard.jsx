@@ -8,6 +8,8 @@ function StudentDashboard() {
   const [message, setMessage] = useState('')
   const [status, setStatus] = useState('')
 
+  // Temporary gesture mappings.
+  // Later these can come from the database.
   const gestures = {
     OPEN_PALM: 'I have a question.',
     THUMBS_UP: 'I understand.',
@@ -27,12 +29,14 @@ function StudentDashboard() {
       return
     }
 
+    // Later this will send the message to the database/backend.
     setStatus('Message sent to your teacher.')
   }
 
   return (
     <div className="page">
 
+      {/* Header */}
       <header className="header">
         <h1>HailMary</h1>
 
@@ -46,81 +50,136 @@ function StudentDashboard() {
 
       <main className="dashboard">
 
-        <h2>Student Dashboard</h2>
+        {/* Dashboard title */}
+        <div className="dashboard-title">
+          <h2>Student Dashboard</h2>
 
-        <p>Welcome, Ryder</p>
+          <p>
+            Communicate with your teacher using your personalized gestures.
+          </p>
+        </div>
 
-        <section className="camera-section">
+        {/* Camera */}
+        <section className="camera-card">
 
-          <h3>Gesture Camera</h3>
+          <div className="camera-card-header">
+
+            <div>
+              <h3>Gesture Camera</h3>
+
+              <p>
+                Position your hand clearly in front of the camera.
+              </p>
+            </div>
+
+            <span className="camera-status">
+              Camera Ready
+            </span>
+
+          </div>
 
           <div className="camera-placeholder">
-            Camera will appear here
+
+            <div>
+              <div className="camera-icon">
+                📷
+              </div>
+
+              <p>
+                Camera preview will appear here
+              </p>
+            </div>
+
           </div>
 
         </section>
 
-        <section>
+        {/* Gesture results */}
+        <section className="gesture-result-card">
+
+          <div className="result-box">
+
+            <span className="result-label">
+              Detected Gesture
+            </span>
+
+            <strong>
+              {detectedGesture || 'Waiting for gesture...'}
+            </strong>
+
+          </div>
+
+          <div className="result-box">
+
+            <span className="result-label">
+              Translated Message
+            </span>
+
+            <strong>
+              {message || 'Your message will appear here.'}
+            </strong>
+
+          </div>
+
+          <button
+            className="send-button"
+            onClick={sendMessage}
+            disabled={!message}
+          >
+            Send to Teacher
+          </button>
+
+          {status && (
+            <p className="status-message">
+              {status}
+            </p>
+          )}
+
+        </section>
+
+        {/* Temporary gesture testing */}
+        <section className="test-section">
 
           <h3>Test Gestures</h3>
 
           <p>
-            These buttons temporarily simulate what the camera
-            will eventually recognize.
+            Use these buttons to simulate gesture recognition
+            until the camera system is connected.
           </p>
 
           <div className="gesture-buttons">
 
-            <button onClick={() => detectGesture('OPEN_PALM')}>
-              ✋ Open Palm
+            <button
+              onClick={() => detectGesture('OPEN_PALM')}
+            >
+              <span>✋</span>
+              Open Palm
             </button>
 
-            <button onClick={() => detectGesture('THUMBS_UP')}>
-              👍 Thumbs Up
+            <button
+              onClick={() => detectGesture('THUMBS_UP')}
+            >
+              <span>👍</span>
+              Thumbs Up
             </button>
 
-            <button onClick={() => detectGesture('CLOSED_FIST')}>
-              ✊ Closed Fist
+            <button
+              onClick={() => detectGesture('CLOSED_FIST')}
+            >
+              <span>✊</span>
+              Closed Fist
             </button>
 
-            <button onClick={() => detectGesture('POINT_UP')}>
-              ☝️ Point Up
+            <button
+              onClick={() => detectGesture('POINT_UP')}
+            >
+              <span>☝️</span>
+              Point Up
             </button>
 
           </div>
 
         </section>
-
-        {detectedGesture && (
-          <section className="message-card">
-
-            <p>
-              <strong>Detected gesture:</strong>
-              {' '}
-              {detectedGesture}
-            </p>
-
-            <h3>Your message</h3>
-
-            <p className="translated-message">
-              "{message}"
-            </p>
-
-            <button
-              className="send-button"
-              onClick={sendMessage}
-            >
-              Send to Teacher
-            </button>
-
-          </section>
-        )}
-
-        {status && (
-          <p className="status-message">
-            {status}
-          </p>
-        )}
 
       </main>
 
