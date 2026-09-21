@@ -18,6 +18,7 @@ button {
   min-height: 100vh;
 }
 
+
 /* HEADER */
 
 .header {
@@ -40,6 +41,21 @@ button {
   color: #d7deea;
 }
 
+.back-button {
+  padding: 10px 18px;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+}
+
+.back-button:hover {
+  background: white;
+  color: #172033;
+}
+
+
 /* HOME */
 
 .home {
@@ -50,21 +66,21 @@ button {
 }
 
 .home h2 {
-  font-size: 44px;
   margin-bottom: 20px;
+  font-size: 44px;
 }
 
 .description {
   max-width: 650px;
   margin: 0 auto 50px;
+  color: #526078;
   font-size: 20px;
   line-height: 1.6;
-  color: #526078;
 }
 
 .home h3 {
-  font-size: 22px;
   margin-bottom: 25px;
+  font-size: 22px;
 }
 
 .role-buttons {
@@ -90,7 +106,8 @@ button {
   transform: translateY(-2px);
 }
 
-/* DASHBOARDS */
+
+/* DASHBOARD */
 
 .dashboard {
   width: min(1000px, 92%);
@@ -98,188 +115,8 @@ button {
   padding: 50px 0;
 }
 
-.dashboard > h2 {
-  font-size: 36px;
-  margin-bottom: 8px;
-}
-
-.dashboard > p {
-  color: #667085;
-  font-size: 18px;
-}
-
-.back-button {
-  padding: 10px 18px;
-  border: 1px solid #ffffff;
-  border-radius: 8px;
-  background: transparent;
-  color: white;
-  font-size: 16px;
-}
-
-.back-button:hover {
-  background: white;
-  color: #172033;
-}
-
-/* STUDENT CAMERA */
-
-.camera-section {
-  margin-top: 35px;
-}
-
-.camera-placeholder {
-  min-height: 280px;
-  margin-top: 15px;
-  border: 2px dashed #aab4c5;
-  border-radius: 16px;
-  background: #e9eef6;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  color: #667085;
-  font-size: 20px;
-}
-
-/* GESTURES */
-
 .dashboard section {
   margin-top: 35px;
-}
-
-.gesture-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.gesture-buttons button {
-  padding: 20px;
-  border: 2px solid #d6dce7;
-  border-radius: 12px;
-  background: white;
-  color: #172033;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.gesture-buttons button:hover {
-  border-color: #3157d5;
-  background: #f0f4ff;
-}
-
-/* TRANSLATED MESSAGE */
-
-.message-card {
-  padding: 28px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-}
-
-.translated-message {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.send-button {
-  margin-top: 15px;
-  padding: 15px 24px;
-  border: none;
-  border-radius: 10px;
-  background: #3157d5;
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-}
-
-.send-button:hover {
-  background: #2444ad;
-}
-
-.status-message {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 10px;
-  background: #e7f6ec;
-  color: #176b35;
-  font-weight: bold;
-}
-
-/* TEACHER */
-
-.teacher-messages {
-  display: grid;
-  gap: 20px;
-  margin-top: 30px;
-}
-
-.teacher-message-card {
-  padding: 25px;
-  border-radius: 16px;
-  background: white;
-  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
-}
-
-.teacher-message-card h3 {
-  margin-top: 0;
-}
-
-.acknowledge-button {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 9px;
-  background: #3157d5;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.acknowledge-button:hover {
-  background: #2444ad;
-}
-
-.acknowledged {
-  font-weight: bold;
-  color: #18723c;
-}
-
-/* ACCESSIBILITY */
-
-button:focus-visible {
-  outline: 4px solid #ffbf47;
-  outline-offset: 3px;
-}
-
-/* MOBILE */
-
-@media (max-width: 650px) {
-  .home {
-    padding-top: 60px;
-  }
-
-  .home h2 {
-    font-size: 34px;
-  }
-
-  .role-buttons {
-    flex-direction: column;
-  }
-
-  .role-button {
-    width: 100%;
-  }
-
-  .gesture-buttons {
-    grid-template-columns: 1fr;
-  }
-
-  .dashboard > h2 {
-    font-size: 30px;
-  }
 }
 
 .dashboard-title {
@@ -296,6 +133,49 @@ button:focus-visible {
   color: #667085;
   font-size: 18px;
 }
+
+
+/* PROFILE */
+
+.profile-card,
+.preferences-card {
+  margin-top: 25px;
+  padding: 25px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.profile-card label,
+.preference-row span {
+  font-weight: bold;
+}
+
+.profile-card input,
+.preference-row input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cfd6e2;
+  border-radius: 9px;
+  background: white;
+  color: #172033;
+  font: inherit;
+}
+
+.profile-card input:focus,
+.preference-row input:focus {
+  outline: 3px solid #cbd7ff;
+  border-color: #3157d5;
+}
+
+
+/* STUDENT CAMERA */
 
 .camera-card {
   padding: 25px;
@@ -321,6 +201,7 @@ button:focus-visible {
 }
 
 .camera-status {
+  flex-shrink: 0;
   padding: 8px 14px;
   border-radius: 30px;
   background: #e8f7ed;
@@ -328,9 +209,73 @@ button:focus-visible {
   font-weight: bold;
 }
 
-.camera-icon {
-  font-size: 48px;
+.camera-offline,
+.offline-status {
+  background: #fff0f0;
+  color: #9d2626;
 }
+
+.camera-preview-wrapper {
+  position: relative;
+  margin-top: 22px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #101828;
+}
+
+.camera-preview {
+  display: block;
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+
+  /*
+   * Makes the front-facing camera preview
+   * feel like a normal mirror.
+   */
+  transform: scaleX(-1);
+}
+
+.camera-preview-hidden {
+  display: none;
+}
+
+.camera-placeholder {
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+  background: #e9eef6;
+  color: #667085;
+}
+
+.camera-placeholder h4 {
+  margin: 0 0 8px;
+  color: #172033;
+  font-size: 22px;
+}
+
+.camera-placeholder p {
+  max-width: 440px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.camera-controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.camera-controls .send-button {
+  margin-top: 0;
+}
+
+
+/* DETECTED GESTURE */
 
 .gesture-result-card {
   margin-top: 25px;
@@ -362,27 +307,120 @@ button:focus-visible {
   font-size: 22px;
 }
 
+.confidence-text {
+  color: #667085;
+  font-size: 14px;
+}
+
+
+/* BUTTONS */
+
+.send-button {
+  margin-top: 15px;
+  padding: 15px 24px;
+  border: none;
+  border-radius: 10px;
+  background: #3157d5;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.send-button:hover {
+  background: #2444ad;
+}
+
 .send-button:disabled {
   background: #aab4c5;
   cursor: not-allowed;
 }
 
+.secondary-button {
+  padding: 13px 20px;
+  border: 1px solid #3157d5;
+  border-radius: 10px;
+  background: white;
+  color: #3157d5;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.secondary-button:hover {
+  background: #f0f4ff;
+}
+
+.secondary-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.status-message {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #e7f6ec;
+  color: #176b35;
+  font-weight: bold;
+}
+
+
+/* GESTURE PREFERENCES */
+
+.section-heading h3,
+.preferences-card h3 {
+  margin: 0 0 6px;
+}
+
+.section-heading p,
+.preferences-card p {
+  margin: 0;
+  color: #667085;
+}
+
+.preference-grid {
+  display: grid;
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.preference-row {
+  display: grid;
+  grid-template-columns: minmax(135px, 0.35fr) 1fr;
+  align-items: center;
+  gap: 15px;
+}
+
+
+/* TEST GESTURES */
+
 .test-section {
   padding-bottom: 40px;
 }
 
+.gesture-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
 .gesture-buttons button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  padding: 20px;
+  border: 2px solid #d6dce7;
+  border-radius: 12px;
+  background: white;
+  color: #172033;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.gesture-buttons button span {
-  font-size: 26px;
+.gesture-buttons button:hover {
+  border-color: #3157d5;
+  background: #f0f4ff;
 }
 
-/* TEACHER DASHBOARD */
+
+/* TEACHER */
 
 .teacher-summary {
   display: grid;
@@ -445,6 +483,19 @@ button:focus-visible {
   font-weight: bold;
 }
 
+.teacher-messages {
+  display: grid;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.teacher-message-card {
+  padding: 25px;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+}
+
 .message-card-top {
   display: flex;
   justify-content: space-between;
@@ -453,6 +504,7 @@ button:focus-visible {
 }
 
 .message-card-top h3 {
+  margin-top: 0;
   margin-bottom: 5px;
   font-size: 21px;
 }
@@ -467,6 +519,11 @@ button:focus-visible {
   padding: 18px;
   background: #f4f7fb;
   border-radius: 12px;
+}
+
+.translated-message {
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .teacher-message-content .translated-message {
@@ -496,7 +553,108 @@ button:focus-visible {
   color: #176b35;
 }
 
+.acknowledge-button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 9px;
+  background: #3157d5;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.acknowledge-button:hover {
+  background: #2444ad;
+}
+
+.acknowledged {
+  font-weight: bold;
+  color: #18723c;
+}
+
+.empty-state {
+  padding: 55px 20px;
+  text-align: center;
+  color: #667085;
+}
+
+.empty-state > div {
+  font-size: 44px;
+}
+
+.empty-state h3 {
+  margin: 10px 0 5px;
+  color: #172033;
+}
+
+
+/* ACCESSIBILITY */
+
+button:focus-visible,
+input:focus-visible {
+  outline: 4px solid #ffbf47;
+  outline-offset: 3px;
+}
+
+
+/* MOBILE */
+
 @media (max-width: 650px) {
+
+  .home {
+    padding-top: 60px;
+  }
+
+  .home h2 {
+    font-size: 34px;
+  }
+
+  .role-buttons {
+    flex-direction: column;
+  }
+
+  .role-button {
+    width: 100%;
+  }
+
+  .dashboard-title h2 {
+    font-size: 30px;
+  }
+
+  .profile-card {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .camera-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .camera-status {
+    align-self: flex-start;
+  }
+
+  .camera-placeholder {
+    min-height: 260px;
+  }
+
+  .camera-controls {
+    flex-direction: column;
+  }
+
+  .camera-controls button {
+    width: 100%;
+  }
+
+  .preference-row {
+    grid-template-columns: 1fr;
+  }
+
+  .gesture-buttons {
+    grid-template-columns: 1fr;
+  }
+
   .teacher-summary {
     grid-template-columns: 1fr;
   }

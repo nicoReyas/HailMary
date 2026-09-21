@@ -142,3 +142,77 @@ Project HailMary
 Built for SASEHack 2026.
 
 
+
+## MVP Quick Start
+
+The current hackathon prototype has three running pieces:
+
+1. FastAPI backend (`backend/app.py`)
+2. Python/OpenCV/MediaPipe camera process (`backend/vision/camera.py`)
+3. React/Vite frontend (`frontend/`)
+
+### 1. Start the backend
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m uvicorn app:app --reload
+```
+
+The API runs at `http://127.0.0.1:8000`.
+
+### 2. Start gesture recognition
+
+Open a second terminal:
+
+```bash
+cd backend
+source .venv/bin/activate
+python -m vision.camera
+```
+
+The camera window recognizes a supported MediaPipe gesture and sends only the recognized gesture + confidence to the backend. Press `Q` in the camera window to stop it.
+
+### 3. Start the frontend
+
+Open a third terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open the Vite address (normally `http://localhost:5173`). Use `/student` for the student dashboard and `/teacher` for the teacher dashboard.
+
+### Demo flow
+
+1. Open the Student Dashboard.
+2. Make a supported hand gesture in the Python camera window.
+3. The detected gesture and translated message appear on the Student Dashboard.
+4. Click **Send to Teacher**.
+5. Open the Teacher Dashboard and see the message appear automatically.
+6. Click **Acknowledge**.
+7. The message changes to acknowledged.
+
+The student can also edit what each supported gesture means under **My Gesture Preferences**.
+
+### Two-laptop demo
+
+Run the backend and camera on the student's Mac with:
+
+```bash
+python -m uvicorn app:app --reload --host 0.0.0.0
+```
+
+On the teacher/frontend Mac, create `frontend/.env` and point it at the backend Mac's local network IP:
+
+```env
+VITE_API_URL=http://BACKEND_MAC_IP:8000
+```
+
+Then restart `npm run dev`.
+
+### Prototype limitation
+
+Messages and gesture preferences are currently stored in memory for the hackathon MVP. Restarting the FastAPI server clears them. Persistent student accounts and database-backed preferences are a planned next step.
