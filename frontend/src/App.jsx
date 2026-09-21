@@ -9,9 +9,7 @@ import './App.css'
 function App() {
   return (
     <BrowserRouter>
-
       <Routes>
-
         <Route
           path="/"
           element={<Home />}
@@ -28,10 +26,10 @@ function App() {
         />
 
       </Routes>
-
     </BrowserRouter>
   )
 }
 
 export default App
+
 
