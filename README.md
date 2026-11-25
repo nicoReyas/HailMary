@@ -145,6 +145,7 @@ HailMary/
 │   └── node_modules/           # Created locally; not pushed to GitHub
 │
 ├── .gitignore
+├── Makefile
 └── README.md
 ```
 
@@ -152,173 +153,23 @@ HailMary/
 
 # Running the Project
 
-HailMary uses **two terminals**:
-
-1. One terminal for the Python/FastAPI backend
-2. One terminal for the React/Vite frontend
-
-You do **not** need a third terminal for the camera.
-
----
-
-## First-Time Setup
-
-You only need to do this section once after cloning the repository or after deleting your local dependency folders.
-
-### 1. Clone the Repository
+Install Make, Python 3.14, and Node.js (20.19+ in the 20.x series, or 22.12+) with npm. From the project root, run:
 
 ```bash
-git clone YOUR_REPOSITORY_URL
-cd HailMary
+make setup
+make dev
 ```
 
----
+Open http://localhost:5173. Press **Ctrl+C** in the terminal to stop both development servers. Run `make dev` to start them again. Rerun `make setup` after changing dependency files or deleting a dependency directory.
 
-## Backend Setup
-
-### 2. Enter the Backend Folder
-
-```bash
-cd backend
-```
-
-### 3. Create the Python Virtual Environment
-
-```bash
-python3.14 -m venv .venv
-```
-
-The `.venv` folder is intentionally not stored in GitHub. Every developer creates their own local virtual environment.
-
-### 4. Activate the Virtual Environment
-
-```bash
-source .venv/bin/activate
-```
-
-Your terminal should now begin with something similar to:
-
-```text
-(.venv) user@MacBook backend %
-```
-
-Verify the Python version:
-
-```bash
-python --version
-```
-
-Expected:
-
-```text
-Python 3.14.7
-```
-
-### 5. Install Backend Dependencies
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-This command reads `requirements.txt` and installs the required Python libraries into `backend/.venv`.
-
-You can confirm MediaPipe is using the expected version:
-
-```bash
-python -c "import mediapipe as mp; print(mp.__version__)"
-```
-
-Expected:
-
-```text
-0.10.35
-```
-
----
-
-## Frontend Setup
-
-Open a second terminal.
-
-### 6. Enter the Frontend Folder
-
-From the HailMary project root:
-
-```bash
-cd frontend
-```
-
-If you are currently somewhere else:
-
-```bash
-cd ~/Desktop/HailMary/frontend
-```
-
-### 7. Install Frontend Dependencies
-
-```bash
-npm install
-```
-
-This creates `frontend/node_modules`.
-
-Like `.venv`, `node_modules` is not stored in GitHub because it can be recreated from `package.json` and `package-lock.json`.
-
----
-
-# Normal Startup
-
-After the first-time setup is complete, you normally only need the commands below.
-
-## Terminal 1 — Start the Backend
-
-```bash
-cd ~/Desktop/HailMary/backend
-source .venv/bin/activate
-python -m uvicorn app:app --reload
-```
-
-You should see something similar to:
-
-```text
-Uvicorn running on http://127.0.0.1:8000
-Application startup complete.
-```
-
-To check that the backend is working, open:
-
-```text
-http://127.0.0.1:8000/health
-```
-
-Expected response:
-
-```json
-{
-  "status": "ok"
-}
-```
-
-Leave this terminal running.
-
----
-
-## Terminal 2 — Start the Frontend
-
-```bash
-cd ~/Desktop/HailMary/frontend
-npm run dev
-```
-
-Vite should print a local address similar to:
-
-```text
-http://localhost:5173
-```
-
-Open that address in your browser.
-
-Leave this terminal running too.
+| Command | What it does |
+| --- | --- |
+| `make help` | List available commands |
+| `make backend` | Start FastAPI on http://127.0.0.1:8000 |
+| `make frontend` | Start Vite on http://localhost:5173 by default |
+| `make health` | Check the running backend for `{"status":"ok"}` |
+| `make lint` | Lint the frontend |
+| `make build` | Build the frontend into `frontend/dist/` |
 
 ---
 
@@ -352,151 +203,11 @@ For a local demo, the Student Dashboard and Teacher Dashboard can be opened in s
 
 ---
 
-# Important: You Do Not Need to Run the Camera Script
-
-Older versions of HailMary required this command:
-
-```bash
-python -m vision.camera
-```
-
-That is **not required for normal use anymore**.
-
-The current flow is:
-
-```text
-Website webcam
-    ->
-FastAPI
-    ->
-MediaPipe
-    ->
-Website
-```
-
-`vision/camera.py` can still be kept as a standalone development/debugging tool, but the normal HailMary demo only requires the backend and frontend terminals.
-
----
-
-# Stopping the Project
-
-To stop either server, click its terminal and press:
-
-```text
-Control + C
-```
-
-You should stop both the FastAPI terminal and the Vite terminal when finished.
-
----
-
-# Starting the Project Again Later
-
-You do **not** need to recreate `.venv`, reinstall Python dependencies, or run `npm install` every time.
-
-Normally:
-
-### Terminal 1
-
-```bash
-cd ~/Desktop/HailMary/backend
-source .venv/bin/activate
-python -m uvicorn app:app --reload
-```
-
-### Terminal 2
-
-```bash
-cd ~/Desktop/HailMary/frontend
-npm run dev
-```
-
-Then open:
-
-```text
-http://localhost:5173
-```
-
----
-
-# When Do I Reinstall Dependencies?
-
-## Python
-
-Run:
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-when:
-
-- You cloned the repository for the first time
-- You recreated `.venv`
-- `requirements.txt` changed
-
-You do **not** need to run it every time you start the project.
-
-## Frontend
-
-Run:
-
-```bash
-npm install
-```
-
-when:
-
-- You cloned the repository for the first time
-- You deleted `node_modules`
-- `package.json` or `package-lock.json` changed
-
-You do **not** need to run it every time you start the frontend.
-
----
-
 # Common Problems
 
-## `.venv/bin/activate: No such file or directory`
+## A Dependency Is Missing
 
-The virtual environment does not exist in that copy of the project.
-
-Run:
-
-```bash
-cd ~/Desktop/HailMary/backend
-python3.14 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-```
-
----
-
-## `pip: command not found`
-
-Use pip through Python:
-
-```bash
-python -m pip install -r requirements.txt
-```
-
----
-
-## Frontend Says a Package Is Missing
-
-From the frontend folder:
-
-```bash
-npm install
-```
-
-Then restart:
-
-```bash
-npm run dev
-```
-
----
+Run `make setup` from the project root, then restart with `make dev`.
 
 ## Camera Does Not Open
 
